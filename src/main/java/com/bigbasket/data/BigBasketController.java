@@ -1,4 +1,4 @@
-package Controller;
+package com.bigbasket.data;
 
 import com.bigbasket.data.APIDataExtraction;
 import org.springframework.beans.factory.annotation.Autowired;

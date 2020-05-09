@@ -36,7 +36,7 @@ public class APIDataExtraction{
                 {
                     JsonNode each_product=products.next();
                     BigBasketEntity new_entity=new BigBasketEntity();
-                    new_entity.setSp(Double.parseDouble(String.valueOf(each_product.path("sp"))));
+                    new_entity.setSp(Double.parseDouble(each_product.path("sp").asText()));
                     new_entity.setW(String.valueOf(each_product.path("w")));
                     new_entity.setP_desc(String.valueOf(each_product.path("p_desc")));
                     new_entity.setSku(Long.parseLong(String.valueOf(each_product.path("sku"))));
