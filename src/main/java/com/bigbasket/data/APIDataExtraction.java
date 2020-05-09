@@ -18,7 +18,7 @@ public class APIDataExtraction{
  private BigBasketRepository basketRepository;
         public void startFetchingData() throws IOException {
             // write your code here
-
+            Integer totalPages = 0;
             String output  = getUrlContents("https://www.bigbasket.com/custompage/sysgenpd/?type=pc&slug=fruits-vegetables&sid=cknWHY2ibWQBoWMBqHNrdV9saXN0kKJuZsOiY2OjNDg5qWJhdGNoX2lkeACiYW_ConVywqJhcMOibHTNARuhb6pwb3B1bGFyaXR5pXNyX2lkAaNtcmnNDi4=");
             System.out.println(output);
 
@@ -30,6 +30,7 @@ public class APIDataExtraction{
             {
                 JsonNode m=it.next();
                 JsonNode product_info= m.path("product_info");
+                totalPages = product_info.path("tot_pages").asInt();
                 JsonNode product_node=product_info.path("products");
                 Iterator<JsonNode> products=product_node.elements();
                 while(products.hasNext())
@@ -44,6 +45,11 @@ public class APIDataExtraction{
                     System.out.print(each_product.path("p_desc").asText()+" "+each_product.path("sp")+" "+each_product.path("w")+" "+each_product.path("sku"));
                     System.out.println();
                 }
+            }
+            for(int i = 0; i < totalPages; i++)
+            {
+                String pageNo = Integer.toString(i);
+                String response  = getUrlContents("https://www.bigbasket.com/product/get-products/?slug=fruits-vegetables&page="+ pageNo +"&tab_type=[%22all%22]&sorted_on=popularity&listtype=pc");
             }
 
         }
