@@ -1,13 +1,13 @@
 package com.bigbasket.data;
 import javax.persistence.*;
 
-@Table
-@Entity(name="BigBasketData")
+@Entity
 public class BigBasketEntity
 {
-    @Column
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
     private long sku;
     @Column
     private String p_desc;
@@ -15,6 +15,8 @@ public class BigBasketEntity
     private String w;
     @Column
     public double sp;
+    @Column
+    public String date;
 
     public BigBasketEntity()
     {
@@ -50,5 +52,12 @@ public class BigBasketEntity
 
     public void setSp(double sp) {
         this.sp = sp;
+    }
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
