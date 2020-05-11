@@ -24,10 +24,10 @@ public class APIDataExtraction{
             // write your code here
             Integer totalPages = 11;
             Date date = Calendar.getInstance().getTime();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String strDate = dateFormat.format(date);
+            basketRepository.deleteAllByDateEquals(strDate);
             String output = getUrlContents("https://www.bigbasket.com/custompage/sysgenpd/?type=pc&slug=fruits-vegetables&sid=cknWHY2ibWQBoWMBqHNrdV9saXN0kKJuZsOiY2OjNDg5qWJhdGNoX2lkeACiYW_ConVywqJhcMOibHTNARuhb6pwb3B1bGFyaXR5pXNyX2lkAaNtcmnNDi4=");
-            System.out.println(output);
             ObjectMapper objectmapper = new ObjectMapper();
             JsonNode rootnode = objectmapper.readTree(output);
             JsonNode childnode = rootnode.path("tab_info");
@@ -90,6 +90,7 @@ public class APIDataExtraction{
             {
                 java.net.CookieManager cm = new java.net.CookieManager();
                 java.net.CookieHandler.setDefault(cm);
+
                 // create a url object
                 URL url = new URL(theUrl);
 

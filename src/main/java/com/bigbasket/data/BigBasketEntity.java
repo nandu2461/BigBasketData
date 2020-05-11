@@ -5,7 +5,7 @@ import javax.persistence.*;
 public class BigBasketEntity
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private long sku;
